@@ -10,7 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    
+    "zndatabase/eloquent": "dev-main"
   },
   "autoload": {
     "psr-4": {
