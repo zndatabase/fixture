@@ -8,7 +8,7 @@ use ZnCore\Domain\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Repositories\DbRepository;
 use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
-use ZnLib\Migration\Domain\Repositories\HistoryRepository;
+use ZnDatabase\Migration\Domain\Repositories\HistoryRepository;
 
 class FixtureService
 {
