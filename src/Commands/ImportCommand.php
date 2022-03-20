@@ -3,6 +3,7 @@
 namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Database\Eloquent\Collection;
+use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
@@ -13,6 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportCommand extends BaseCommand
 {
+    
+    use OverwriteDatabaseTrait;
+    
     protected static $defaultName = 'db:fixture:import';
 
     protected function configure()
@@ -30,6 +34,10 @@ class ImportCommand extends BaseCommand
     {
         $output->writeln('<fg=white># Fixture IMPORT</>');
 
+        if (!$this->isContinue($input, $output)) {
+            return 0;
+        }
+        
         /** @var FixtureEntity[]|Collection $tableCollection */
         $tableCollection = $this->fixtureService->allFixtures();
         $tableArray = EntityHelper::getColumn($tableCollection, 'name');
