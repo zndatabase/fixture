@@ -21,7 +21,7 @@ trait ConfigTrait
         if ($mainConfigFile == null) {
             $mainConfigFile = $_ENV['ELOQUENT_CONFIG_FILE'];
         }
-        $store = new StoreFile(__DIR__ . '/../../../../../server.soc/' . $mainConfigFile);
+        $store = new StoreFile(__DIR__ . '/../../../../../../' . $mainConfigFile);
         $config = $store->load();
         return $config;
     }
