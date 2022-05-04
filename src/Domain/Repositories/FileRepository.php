@@ -4,6 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\FindFileHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
@@ -137,7 +138,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
 
     private function scanDir($dir): array
     {
-        $files = FileHelper::scanDir($dir);
+        $files = FindFileHelper::scanDir($dir);
         $array = [];
         foreach ($files as $file) {
             $name = FileHelper::fileRemoveExt($file);
