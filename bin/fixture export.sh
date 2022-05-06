@@ -1,2 +1,3 @@
 #!/bin/sh
-php console db:fixture:export
+cd ../../../bin
+php zn db:fixture:export
