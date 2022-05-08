@@ -4,7 +4,8 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Helpers\FindFileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
@@ -48,10 +49,10 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
             throw new InvalidConfigException('Empty directories configuration for fixtures!');
         }
         foreach ($this->config['directory'] as $dir) {
-            $fixtureArray = $this->scanDir(FileHelper::prepareRootPath($dir));
+            $fixtureArray = $this->scanDir(FilePathHelper::prepareRootPath($dir));
             foreach ($fixtureArray as $i => $item) {
 //                dd($item);
-                if(FileHelper::fileExt($item['fileName']) != 'php') {
+                if(FilePathHelper::fileExt($item['fileName']) != 'php') {
                     unset($fixtureArray[$i]);
                 }
             }
@@ -141,7 +142,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         $files = FindFileHelper::scanDir($dir);
         $array = [];
         foreach ($files as $file) {
-            $name = FileHelper::fileRemoveExt($file);
+            $name = FilePathHelper::fileRemoveExt($file);
             $entity = [
                 'name' => $name,
                 'fileName' => $dir . '/' . $file,
