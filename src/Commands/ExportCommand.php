@@ -59,7 +59,8 @@ class ExportCommand extends BaseCommand
         $output->writeln('');
 
         $logWidget = new LogWidget($output);
-
+        $logWidget->setPretty(true);
+        $logWidget->setLineLength(40);
         foreach ($selectedTables as $tableName) {
             $logWidget->start(' ' . $tableName);
             $this->fixtureService->exportTable($tableName);

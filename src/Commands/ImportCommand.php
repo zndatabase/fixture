@@ -59,7 +59,8 @@ class ImportCommand extends BaseCommand
         $output->writeln('');
 
         $logWidget = new LogWidget($output);
-
+        $logWidget->setPretty(true);
+        $logWidget->setLineLength(40);
         $this->fixtureService->importAll($selectedTables, function ($tableName) use($logWidget) {
             $logWidget->start(' ' . $tableName);
         }, function ($tableName) use($logWidget) {
