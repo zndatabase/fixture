@@ -4,6 +4,8 @@ use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 DotEnv::init();
 
 $kernel = new Kernel('console');
