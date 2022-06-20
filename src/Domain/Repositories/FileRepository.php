@@ -10,7 +10,7 @@ use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
 use ZnCore\Base\Libs\Store\StoreFile;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\Interfaces\Repository\RepositoryInterface;
 use ZnDatabase\Base\Domain\Entities\RelationEntity;

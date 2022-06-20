@@ -7,9 +7,9 @@ use Illuminate\Database\Schema\MySqlBuilder;
 use Illuminate\Database\Schema\PostgresBuilder;
 use Illuminate\Support\Collection;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
-use ZnCore\Domain\Traits\EntityManagerTrait;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnDatabase\Eloquent\Domain\Base\BaseEloquentRepository;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
@@ -23,7 +23,7 @@ class DbRepository //extends BaseEloquentRepository
 
     use TableNameTrait;
     use EloquentTrait;
-    //use EntityManagerTrait;
+    //use EntityManagerAwareTrait;
 
 //    private $capsule;
 

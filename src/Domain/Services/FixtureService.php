@@ -4,7 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Services;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Repositories\DbRepository;
 use ZnDatabase\Fixture\Domain\Repositories\FileRepository;

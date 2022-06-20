@@ -4,7 +4,7 @@ namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Support\Collection;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnLib\Console\Symfony4\Question\ChoiceQuestion;
 use Symfony\Component\Console\Input\InputInterface;
