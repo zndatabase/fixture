@@ -4,6 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Services;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Repositories\DbRepository;
@@ -59,7 +60,7 @@ class FixtureService
     public function importAll(array $selectedTables, callable $beforeOutput = null, callable $afterOutput = null) {
         /** @var FixtureEntity[]|\Illuminate\Database\Eloquent\Collection $tableCollection */
         $tableCollection = $this->allFixtures();
-        $tableCollection = EntityHelper::indexingCollection($tableCollection, 'name');
+        $tableCollection = CollectionHelper::indexing($tableCollection, 'name');
 
         foreach ($selectedTables as $tableName) {
             if($this->dbRepository->isHasTable($tableName)) {

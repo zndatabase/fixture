@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
@@ -59,7 +60,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         //return $collection;
 
         $entityClass = $this->getEntityClass();
-        return EntityHelper::createEntityCollection($entityClass, $array);
+        return CollectionHelper::create($entityClass, $array);
     }
 
     private function getRelations(string $name): array

@@ -3,6 +3,7 @@
 namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Support\Collection;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
@@ -42,7 +43,7 @@ class ExportCommand extends BaseCommand
 
         $withConfirm = $input->getOption('withConfirm');
 
-        $tableNameArray = EntityHelper::getColumn($tableCollection, 'name');
+        $tableNameArray = CollectionHelper::getColumn($tableCollection, 'name');
         if ($withConfirm) {
             $output->writeln('');
             $question = new ChoiceQuestion(

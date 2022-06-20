@@ -3,6 +3,7 @@
 namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Database\Eloquent\Collection;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
@@ -40,7 +41,7 @@ class ImportCommand extends BaseCommand
         
         /** @var FixtureEntity[]|Collection $tableCollection */
         $tableCollection = $this->fixtureService->allFixtures();
-        $tableArray = EntityHelper::getColumn($tableCollection, 'name');
+        $tableArray = CollectionHelper::getColumn($tableCollection, 'name');
 
         $withConfirm = $input->getOption('withConfirm');
         if ($withConfirm) {
