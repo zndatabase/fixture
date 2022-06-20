@@ -3,34 +3,31 @@
 namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Illuminate\Support\Collection;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
-use ZnCore\Base\Helpers\LoadHelper;
+use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
+use ZnCore\Base\Libs\Store\StoreFile;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Domain\Interfaces\Repository\RepositoryInterface;
-use ZnCore\Base\Exceptions\InvalidConfigException;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnCore\Base\Libs\Store\StoreFile;
+use ZnDatabase\Base\Domain\Entities\RelationEntity;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Libs\DataFixture;
 use ZnDatabase\Fixture\Domain\Libs\FixtureInterface;
-use ZnDatabase\Fixture\Domain\Traits\ConfigTrait;
-use ZnDatabase\Base\Domain\Entities\RelationEntity;
 use ZnSandbox\Sandbox\Generator\Domain\Services\GeneratorService;
 
 class FileRepository implements RepositoryInterface, GetEntityClassInterface
 {
 
-    use ConfigTrait;
-
     public $extension = 'php';
 
     public function __construct($mainConfigFile = null)
     {
-        $config = LoadHelper::loadConfig($mainConfigFile);
+        $config = StoreHelper::load($_ENV['ROOT_DIRECTORY'] . '/' . $mainConfigFile);
+//        $config = LoadHelper::loadConfig($mainConfigFile);
         $this->config = $config['fixture'];
         /*if(empty($this->config)) {
             throw new InvalidConfigException('Empty fixture configuration!');
@@ -52,7 +49,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
             $fixtureArray = $this->scanDir(FilePathHelper::prepareRootPath($dir));
             foreach ($fixtureArray as $i => $item) {
 //                dd($item);
-                if(FilePathHelper::fileExt($item['fileName']) != 'php') {
+                if (FilePathHelper::fileExt($item['fileName']) != 'php') {
                     unset($fixtureArray[$i]);
                 }
             }
@@ -65,7 +62,8 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         return EntityHelper::createEntityCollection($entityClass, $array);
     }
 
-    private function getRelations(string $name): array {
+    private function getRelations(string $name): array
+    {
         /** @var GeneratorService $generatorService */
         $generatorService = ClassHelper::createObject(GeneratorService::class);
         $struct = $generatorService->getStructure([$name]);
@@ -86,7 +84,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         $data['deps'] = array_unique($data['deps']);
         $data['deps'] = array_values($data['deps']);
 
-        if(property_exists($collection->first(), 'id')) {
+        if (property_exists($collection->first(), 'id')) {
             $collection = $collection->sortBy('id');
         }
         $data['collection'] = ArrayHelper::toArray($collection->toArray());
@@ -97,18 +95,18 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
     public function loadData($name): FixtureInterface
     {
         $data = $this->getStoreInstance($name)->load();
-        if(empty($data)) {
+        if (empty($data)) {
             return new DataFixture([], []);
-        } elseif(ArrayHelper::isAssociative($data)) {
+        } elseif (ArrayHelper::isAssociative($data)) {
             return new DataFixture($data['collection'], $data['deps'] ?? []);
-        } elseif($data instanceof FixtureInterface) {
+        } elseif ($data instanceof FixtureInterface) {
             return $data;
         } elseif (ArrayHelper::isIndexed($data)) {
             return new DataFixture($data);
         }
 
         //dd($data);
-        throw new \Exception('Bad fixture format of '.$name.'!');
+        throw new \Exception('Bad fixture format of ' . $name . '!');
     }
 
     private function oneByName(string $name): FixtureEntity
