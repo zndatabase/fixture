@@ -12,7 +12,7 @@ use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
 use ZnCore\Base\Libs\Store\StoreFile;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Libs\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
 use ZnDatabase\Base\Domain\Entities\RelationEntity;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
