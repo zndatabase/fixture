@@ -4,7 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Exceptions\InvalidConfigException;
-use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
