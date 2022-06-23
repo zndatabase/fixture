@@ -7,7 +7,7 @@ use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnLib\Console\Symfony4\Question\ChoiceQuestion;
 use Symfony\Component\Console\Input\InputInterface;
