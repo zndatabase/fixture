@@ -110,7 +110,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         throw new \Exception('Bad fixture format of ' . $name . '!');
     }
 
-    private function oneByName(string $name): FixtureEntity
+    private function findOneByName(string $name): FixtureEntity
     {
         $collection = $this->allTables();
         $collection = $collection->where('name', '=', $name);
@@ -131,7 +131,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
 
     private function getStoreInstance(string $name): StoreFile
     {
-        $entity = $this->oneByName($name);
+        $entity = $this->findOneByName($name);
         $store = new StoreFile($entity->fileName);
         return $store;
     }
