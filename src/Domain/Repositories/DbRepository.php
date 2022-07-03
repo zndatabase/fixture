@@ -7,6 +7,7 @@ use Illuminate\Database\Schema\MySqlBuilder;
 use Illuminate\Database\Schema\PostgresBuilder;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
@@ -130,7 +131,10 @@ class DbRepository //extends BaseEloquentRepository
         $queryBuilder = $connection->table($targetTableName);*/
         $queryBuilder = $this->getQueryBuilderByTableName($name);
         //$queryBuilder->truncate();
-        $chunks = $collection->chunk(150);
+
+        $chunks = CollectionHelper::chunk($collection, 150);
+
+//        $chunks = $collection->chunk(150);
         foreach ($chunks as $chunk) {
             $data = ArrayHelper::toArray($chunk);
             $queryBuilder->insert($data);

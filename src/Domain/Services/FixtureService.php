@@ -2,6 +2,8 @@
 
 namespace ZnDatabase\Fixture\Domain\Services;
 
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
@@ -129,7 +131,15 @@ class FixtureService
     private function filterByExclude(Collection $collection)
     {
         $excludeNames = $this->excludeNames;
-        return $collection->whereNotIn('name', $excludeNames);
+
+        $expr = new Comparison('name', Comparison::NIN, $excludeNames);
+        $criteria = new Criteria();
+        $criteria->andWhere($expr);
+        return $collection->matching($criteria);
+
+
+//        $collection = new \Illuminate\Support\Collection($collection->toArray());
+//        return $collection->whereNotIn('name', $excludeNames);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace ZnDatabase\Fixture\Domain\Repositories;
 
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
@@ -113,7 +115,17 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
     private function findOneByName(string $name): FixtureEntity
     {
         $collection = $this->allTables();
-        $collection = $collection->where('name', '=', $name);
+        $expr = new Comparison('name', Comparison::EQ, $name);
+        $criteria = new Criteria();
+        $criteria->andWhere($expr);
+        $collection =  $collection->matching($criteria);
+
+
+
+//        $collection = new \Illuminate\Support\Collection($this->allTables());
+//        $collection = $collection->where('name', '=', $name);
+
+
         if ($collection->count() < 1) {
 
             $entityClass = $this->getEntityClass();
