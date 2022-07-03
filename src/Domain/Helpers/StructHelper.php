@@ -4,7 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Helpers;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Schema\Builder;
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Base\Domain\Entities\SchemaEntity;
 use ZnDatabase\Base\Domain\Entities\TableEntity;

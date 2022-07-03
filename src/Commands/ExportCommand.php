@@ -2,7 +2,7 @@
 
 namespace ZnDatabase\Fixture\Commands;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;

@@ -2,7 +2,7 @@
 
 namespace ZnDatabase\Fixture\Domain\Repositories;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
