@@ -23,7 +23,7 @@ class StructHelper
     
     /**
      * @param Builder $schema
-     * @return Collection | TableEntity[]
+     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
      */
     public static function allTables(Builder $schema): Collection
     {
@@ -43,7 +43,7 @@ class StructHelper
 
     /**
      * @param ConnectionInterface $connection
-     * @return Collection | TableEntity[]
+     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
      */
     public static function allPostgresTables(ConnectionInterface $connection): Collection
     {
@@ -65,7 +65,7 @@ class StructHelper
 
     /**
      * @param ConnectionInterface $connection
-     * @return Collection | SchemaEntity[]
+     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | SchemaEntity[]
      */
     public static function allPostgresSchemas(ConnectionInterface $connection): Collection
     {
