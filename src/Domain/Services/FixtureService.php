@@ -129,7 +129,7 @@ class FixtureService
         }
     }
 
-    private function filterByExclude(Collection $collection)
+    private function filterByExclude(Enumerable $collection)
     {
         $excludeNames = $this->excludeNames;
 
