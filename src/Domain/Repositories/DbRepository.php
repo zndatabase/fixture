@@ -5,6 +5,7 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\MySqlBuilder;
 use Illuminate\Database\Schema\PostgresBuilder;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
@@ -142,7 +143,7 @@ class DbRepository //extends BaseEloquentRepository
         $this->resetAutoIncrement($name);
     }
 
-    public function loadData($name): Collection
+    public function loadData($name): Enumerable
     {
         /*$tableAlias = $this->getCapsule()->getAlias();
         $targetTableName = $this->encodeTableName($name);
@@ -153,7 +154,7 @@ class DbRepository //extends BaseEloquentRepository
         return new Collection($data);
     }
 
-    public function allTables(): Collection
+    public function allTables(): Enumerable
     {
         $tableAlias = $this->getCapsule()->getAlias();
         /* @var Builder|MySqlBuilder|PostgresBuilder $schema */

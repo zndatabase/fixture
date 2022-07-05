@@ -4,6 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Helpers;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Schema\Builder;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Base\Domain\Entities\SchemaEntity;
@@ -25,7 +26,7 @@ class StructHelper
      * @param Builder $schema
      * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
      */
-    public static function allTables(Builder $schema): Collection
+    public static function allTables(Builder $schema): Enumerable
     {
         $dbName = $schema->getConnection()->getDatabaseName();
         $array = $schema->getAllTables();
@@ -43,9 +44,9 @@ class StructHelper
 
     /**
      * @param ConnectionInterface $connection
-     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
+     * @return Enumerable | TableEntity[]
      */
-    public static function allPostgresTables(ConnectionInterface $connection): Collection
+    public static function allPostgresTables(ConnectionInterface $connection): Enumerable
     {
         $schemaCollection = self::allPostgresSchemas($connection);
         $tableCollection = new Collection;
@@ -67,7 +68,7 @@ class StructHelper
      * @param ConnectionInterface $connection
      * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | SchemaEntity[]
      */
-    public static function allPostgresSchemas(ConnectionInterface $connection): Collection
+    public static function allPostgresSchemas(ConnectionInterface $connection): Enumerable
     {
         $schemaCollection = $connection->select("select schema_name from information_schema.schemata;");
         $schemaNames = ArrayHelper::getColumn($schemaCollection, 'schema_name');

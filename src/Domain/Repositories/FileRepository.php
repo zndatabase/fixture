@@ -4,6 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
@@ -42,7 +43,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         return FixtureEntity::class;
     }
 
-    public function allTables(): Collection
+    public function allTables(): Enumerable
     {
         $array = [];
         if (empty($this->config['directory'])) {

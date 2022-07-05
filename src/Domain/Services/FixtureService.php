@@ -4,6 +4,7 @@ namespace ZnDatabase\Fixture\Domain\Services;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
@@ -41,7 +42,7 @@ class FixtureService
         return $this->filterByExclude($collection);
     }
 
-    public function allTables(): Collection
+    public function allTables(): Enumerable
     {
         $collection = $this->dbRepository->allTables();
         return $this->filterByExclude($collection);
