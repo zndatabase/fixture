@@ -5,19 +5,16 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Database\Schema\MySqlBuilder;
 use Illuminate\Database\Schema\PostgresBuilder;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
-use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
-use ZnDatabase\Eloquent\Domain\Base\BaseEloquentRepository;
-use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
-use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
-use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
 use ZnDatabase\Fixture\Domain\Helpers\StructHelper;
 
 class DbRepository //extends BaseEloquentRepository
@@ -25,6 +22,7 @@ class DbRepository //extends BaseEloquentRepository
 
     use TableNameTrait;
     use EloquentTrait;
+
     //use EntityManagerAwareTrait;
 
 //    private $capsule;
@@ -124,7 +122,7 @@ class DbRepository //extends BaseEloquentRepository
         return $queryBuilder;
     }*/
 
-    public function saveData($name, Collection $collection)
+    public function saveData($name, Enumerable $collection)
     {
         /*$tableAlias = $this->getCapsule()->getAlias();
         $targetTableName = $this->encodeTableName($name);
@@ -159,12 +157,12 @@ class DbRepository //extends BaseEloquentRepository
         $tableAlias = $this->getCapsule()->getAlias();
         /* @var Builder|MySqlBuilder|PostgresBuilder $schema */
         $schema = $this->getSchema();
-        
-        
+
+
         //dd($this->getCapsule()->getDatabaseManager());
         $dbName = $schema->getConnection()->getDatabaseName();
         $collection = new Collection;
-        if($schema->getConnection()->getDriverName() == DbDriverEnum::SQLITE) {
+        if ($schema->getConnection()->getDriverName() == DbDriverEnum::SQLITE) {
             $array = $schema->getConnection()->getPdo()->query('SELECT name FROM sqlite_master WHERE type=\'table\'')->fetchAll(\PDO::FETCH_COLUMN);
             foreach ($array as $targetTableName) {
                 $sourceTableName = $tableAlias->decode('default', $targetTableName);
@@ -175,7 +173,7 @@ class DbRepository //extends BaseEloquentRepository
                 $collection->add($entity);
             }
         } else {
-            if($schema->getConnection()->getDriverName() == DbDriverEnum::PGSQL) {
+            if ($schema->getConnection()->getDriverName() == DbDriverEnum::PGSQL) {
                 $tableCollection = StructHelper::allPostgresTables($schema->getConnection());
             } else {
                 $tableCollection = StructHelper::allTables($schema);

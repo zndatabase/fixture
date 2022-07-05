@@ -2,14 +2,13 @@
 
 namespace ZnDatabase\Fixture\Commands;
 
-use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
-use ZnLib\Console\Symfony4\Widgets\LogWidget;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
-use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
-use ZnLib\Console\Symfony4\Question\ChoiceQuestion;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
+use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
+use ZnLib\Console\Symfony4\Question\ChoiceQuestion;
+use ZnLib\Console\Symfony4\Widgets\LogWidget;
 
 class ExportCommand extends BaseCommand
 {
@@ -30,7 +29,7 @@ class ExportCommand extends BaseCommand
     {
         $output->writeln('<fg=white># Fixture EXPORT</>');
 
-        /** @var FixtureEntity[]|Collection $tableCollection */
+        /** @var FixtureEntity[]|Enumerable $tableCollection */
         $tableCollection = $this->fixtureService->allFixtures();
         //dd($tableCollection->toArray());
 

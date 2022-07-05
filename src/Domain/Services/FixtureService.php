@@ -4,11 +4,10 @@ namespace ZnDatabase\Fixture\Domain\Services;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Repositories\DbRepository;
 use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
@@ -60,13 +59,14 @@ class FixtureService
         $this->dbRepository->deleteTable($name);
     }
 
-    public function importAll(array $selectedTables, callable $beforeOutput = null, callable $afterOutput = null) {
+    public function importAll(array $selectedTables, callable $beforeOutput = null, callable $afterOutput = null)
+    {
         /** @var FixtureEntity[]|\Illuminate\Database\Eloquent\Collection $tableCollection */
         $tableCollection = $this->allFixtures();
         $tableCollection = CollectionHelper::indexing($tableCollection, 'name');
 
         foreach ($selectedTables as $tableName) {
-            if($this->dbRepository->isHasTable($tableName)) {
+            if ($this->dbRepository->isHasTable($tableName)) {
                 $this->importTable($tableName, $beforeOutput, $afterOutput, $tableCollection);
                 //$afterOutput('OK');
             } else {
@@ -77,7 +77,7 @@ class FixtureService
 
     public function importTable($tableName, callable $beforeOutput = null, callable $afterOutput = null, array $tableCollection = [])
     {
-        if( array_key_exists($tableName, $this->loadedFixtures)) {
+        if (array_key_exists($tableName, $this->loadedFixtures)) {
             return;
         }
         $deps = [];
@@ -88,17 +88,17 @@ class FixtureService
         $deps = $dataFixture->deps();
         $dataFixture->unload();
         $data = $dataFixture->load();
-        if($deps) {
+        if ($deps) {
             foreach ($deps as $dep) {
                 $this->importTable($dep, $beforeOutput, $afterOutput, $tableCollection);
             }
         }
 
-        if($beforeOutput) {
+        if ($beforeOutput) {
             $beforeOutput($tableName);
         }
 
-        if($data) {
+        if ($data) {
             $attributes = [];
             foreach ($data as $row) {
                 $attributes = ArrayHelper::merge($attributes, array_keys($row));
@@ -114,7 +114,7 @@ class FixtureService
             $this->dbRepository->saveData($tableName, new Collection($data));
         }
 
-        if($afterOutput) {
+        if ($afterOutput) {
             $afterOutput($tableName);
         }
 

@@ -4,24 +4,25 @@ namespace ZnDatabase\Fixture\Domain\Helpers;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Schema\Builder;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Base\Domain\Entities\SchemaEntity;
 use ZnDatabase\Base\Domain\Entities\TableEntity;
 
 class StructHelper
 {
-    
-    public static function getTableNameFromEntity(TableEntity $tableEntity): string {
+
+    public static function getTableNameFromEntity(TableEntity $tableEntity): string
+    {
         $tableName = '';
-        if($tableEntity->getSchema() && $tableEntity->getSchema()->getName() != 'public') {
+        if ($tableEntity->getSchema() && $tableEntity->getSchema()->getName() != 'public') {
             $tableName .= $tableEntity->getSchema()->getName() . '.';
         }
-        $tableName .=$tableEntity->getName();
+        $tableName .= $tableEntity->getName();
         return $tableName;
     }
-    
+
     /**
      * @param Builder $schema
      * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
@@ -80,7 +81,7 @@ class StructHelper
             "information_schema",
         ];
         $schemaNames = array_diff($schemaNames, $excludes);
-        /** @var SchemaEntity[] | Collection $collection */
+        /** @var SchemaEntity[] | Enumerable $collection */
         $collection = new Collection;
         foreach ($schemaNames as $schemaName) {
             $entity = new SchemaEntity;

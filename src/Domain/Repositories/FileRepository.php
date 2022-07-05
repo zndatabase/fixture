@@ -4,23 +4,23 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
-use ZnCore\Base\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\FileSystem\Helpers\FindFileHelper;
-use ZnLib\Components\Store\Helpers\StoreHelper;
-use ZnLib\Components\Store\StoreFile;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Base\Instance\Helpers\ClassHelper;
+use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\Repository\Interfaces\RepositoryInterface;
 use ZnDatabase\Base\Domain\Entities\RelationEntity;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Libs\DataFixture;
 use ZnDatabase\Fixture\Domain\Libs\FixtureInterface;
+use ZnLib\Components\Store\Helpers\StoreHelper;
+use ZnLib\Components\Store\StoreFile;
 use ZnSandbox\Sandbox\Generator\Domain\Services\GeneratorService;
 
 class FileRepository implements RepositoryInterface, GetEntityClassInterface
@@ -79,7 +79,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         return $deps;
     }
 
-    public function saveData($name, Collection $collection)
+    public function saveData($name, Enumerable $collection)
     {
         $dataFixture = $this->loadData($name);
         $data['deps'] = $dataFixture->deps();
@@ -119,8 +119,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         $expr = new Comparison('name', Comparison::EQ, $name);
         $criteria = new Criteria();
         $criteria->andWhere($expr);
-        $collection =  $collection->matching($criteria);
-
+        $collection = $collection->matching($criteria);
 
 
 //        $collection = new \Illuminate\Support\Collection($this->allTables());
