@@ -10,7 +10,7 @@ use ZnCore\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Instance\Helpers\ClassHelper;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnCore\Entity\Helpers\EntityHelper;
 use ZnCore\Repository\Interfaces\RepositoryInterface;
