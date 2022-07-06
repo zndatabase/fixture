@@ -3,10 +3,10 @@
 namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Database\Eloquent\Collection;
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
+use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnLib\Console\Symfony4\Question\ChoiceQuestion;

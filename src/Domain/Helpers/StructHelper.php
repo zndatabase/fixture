@@ -5,8 +5,8 @@ namespace ZnDatabase\Fixture\Domain\Helpers;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Schema\Builder;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Collection\Libs\Collection;
+use ZnCore\Collection\Interfaces\Enumerable;
+use ZnCore\Collection\Libs\Collection;
 use ZnDatabase\Base\Domain\Entities\SchemaEntity;
 use ZnDatabase\Base\Domain\Entities\TableEntity;
 
@@ -25,7 +25,7 @@ class StructHelper
 
     /**
      * @param Builder $schema
-     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | TableEntity[]
+     * @return \ZnCore\Collection\Interfaces\Enumerable | TableEntity[]
      */
     public static function allTables(Builder $schema): Enumerable
     {
@@ -67,7 +67,7 @@ class StructHelper
 
     /**
      * @param ConnectionInterface $connection
-     * @return \ZnCore\Domain\Collection\Interfaces\Enumerable | SchemaEntity[]
+     * @return \ZnCore\Collection\Interfaces\Enumerable | SchemaEntity[]
      */
     public static function allPostgresSchemas(ConnectionInterface $connection): Enumerable
     {
