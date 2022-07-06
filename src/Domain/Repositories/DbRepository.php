@@ -161,7 +161,7 @@ class DbRepository //extends BaseEloquentRepository
 
         //dd($this->getCapsule()->getDatabaseManager());
         $dbName = $schema->getConnection()->getDatabaseName();
-        $collection = new Collection;
+        $collection = new Collection();
         if ($schema->getConnection()->getDriverName() == DbDriverEnum::SQLITE) {
             $array = $schema->getConnection()->getPdo()->query('SELECT name FROM sqlite_master WHERE type=\'table\'')->fetchAll(\PDO::FETCH_COLUMN);
             foreach ($array as $targetTableName) {
