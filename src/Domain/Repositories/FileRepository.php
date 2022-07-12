@@ -49,9 +49,8 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
             throw new InvalidConfigException('Empty directories configuration for fixtures!');
         }
         foreach ($this->config['directory'] as $dir) {
-            $fixtureArray = $this->scanDir(FilePathHelper::prepareRootPath($dir));
+            $fixtureArray = $this->scanDir($dir);
             foreach ($fixtureArray as $i => $item) {
-//                dd($item);
                 if (FilePathHelper::fileExt($item['fileName']) != 'php') {
                     unset($fixtureArray[$i]);
                 }
@@ -161,5 +160,4 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
         }
         return $array;
     }
-
 }
