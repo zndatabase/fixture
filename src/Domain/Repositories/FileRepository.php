@@ -29,7 +29,7 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
 
     public function __construct($mainConfigFile = null)
     {
-        $config = StoreHelper::load($_ENV['ROOT_DIRECTORY'] . '/' . $mainConfigFile);
+        $config = StoreHelper::load($mainConfigFile);
 //        $config = LoadHelper::loadConfig($mainConfigFile);
         $this->config = $config['fixture'];
         /*if(empty($this->config)) {
