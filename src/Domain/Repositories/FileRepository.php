@@ -5,20 +5,19 @@ namespace ZnDatabase\Fixture\Domain\Repositories;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Arr\Helpers\ArrayHelper;
-use ZnCore\FileSystem\Helpers\FilePathHelper;
-use ZnCore\FileSystem\Helpers\FindFileHelper;
-use ZnCore\Instance\Helpers\ClassHelper;
-use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Collection\Interfaces\Enumerable;
+use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnCore\Entity\Helpers\EntityHelper;
+use ZnCore\FileSystem\Helpers\FilePathHelper;
+use ZnCore\FileSystem\Helpers\FindFileHelper;
+use ZnCore\Instance\Helpers\ClassHelper;
 use ZnCore\Repository\Interfaces\RepositoryInterface;
 use ZnDatabase\Base\Domain\Entities\RelationEntity;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Libs\DataFixture;
 use ZnDatabase\Fixture\Domain\Libs\FixtureInterface;
-use ZnLib\Components\Store\Helpers\StoreHelper;
 use ZnLib\Components\Store\StoreFile;
 use ZnSandbox\Sandbox\Generator\Domain\Services\GeneratorService;
 
@@ -27,14 +26,9 @@ class FileRepository implements RepositoryInterface, GetEntityClassInterface
 
     public $extension = 'php';
 
-    public function __construct($mainConfigFile = null)
+    public function __construct($config = [])
     {
-        $config = StoreHelper::load($mainConfigFile);
-//        $config = LoadHelper::loadConfig($mainConfigFile);
-        $this->config = $config['fixture'];
-        /*if(empty($this->config)) {
-            throw new InvalidConfigException('Empty fixture configuration!');
-        }*/
+        $this->config = $config;
     }
 
     public function getEntityClass(): string

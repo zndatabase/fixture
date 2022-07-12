@@ -1,12 +1,14 @@
 <?php
 
 use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
+use ZnLib\Components\Store\Helpers\StoreHelper;
 
 return [
     'definitions' => [],
     'singletons' => [
         FileRepository::class => function () {
-            return new FileRepository($_ENV['ELOQUENT_CONFIG_FILE']);
+            $config = StoreHelper::load($_ENV['FIXTURE_CONFIG_FILE']);
+            return new FileRepository($config);
         },
     ],
 ];
