@@ -5,7 +5,7 @@ namespace ZnDatabase\Fixture\Commands;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use ZnCore\Collection\Interfaces\Enumerable;
-use ZnCore\Entity\Helpers\CollectionHelper;
+use ZnDomain\Entity\Helpers\CollectionHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnLib\Console\Symfony4\Question\ChoiceQuestion;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
