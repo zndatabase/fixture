@@ -3,7 +3,7 @@
 namespace ZnDatabase\Fixture\Commands;
 
 use Illuminate\Database\Eloquent\Collection;
-use ZnDomain\Entity\Helpers\CollectionHelper;
+use ZnCore\Collection\Helpers\CollectionHelper;
 use ZnDatabase\Base\Console\Traits\OverwriteDatabaseTrait;
 use ZnLib\Console\Symfony4\Widgets\LogWidget;
 use ZnDomain\Entity\Helpers\EntityHelper;

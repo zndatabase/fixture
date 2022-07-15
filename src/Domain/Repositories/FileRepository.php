@@ -8,7 +8,7 @@ use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnDomain\Domain\Interfaces\GetEntityClassInterface;
-use ZnDomain\Entity\Helpers\CollectionHelper;
+use ZnCore\Collection\Helpers\CollectionHelper;
 use ZnDomain\Entity\Helpers\EntityHelper;
 use ZnCore\FileSystem\Helpers\FilePathHelper;
 use ZnCore\FileSystem\Helpers\FindFileHelper;

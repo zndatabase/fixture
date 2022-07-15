@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnCore\Collection\Libs\Collection;
-use ZnDomain\Entity\Helpers\CollectionHelper;
+use ZnCore\Collection\Helpers\CollectionHelper;
 use ZnDatabase\Fixture\Domain\Entities\FixtureEntity;
 use ZnDatabase\Fixture\Domain\Repositories\DbRepository;
 use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
